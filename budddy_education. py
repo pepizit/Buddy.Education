@@ -1,0 +1,27 @@
+# buddy_education.py
+
+import random
+
+# Base de respostas do Buddy
+respostas = {
+    "oi": ["Oi! Como você está?", "Olá, bem-vindo!"],
+    "quem é você": ["Eu sou o Buddy, e vou te ensinar algumas coisas legais!", "Eu sou o Buddy, seu assistente educativo!"],
+    "o que é Brasil": ["O Brasil é um país da América do Sul.", "Brasil é o maior país da América do Sul!"],
+    "default": ["Interessante... me conta mais!", "Hmm, não sei bem sobre isso, mas me conte mais!"]
+}
+
+def responder(pergunta):
+    pergunta = pergunta.lower()
+    for chave in respostas:
+        if chave in pergunta:
+            return random.choice(respostas[chave])
+    return random.choice(respostas["default"])
+
+# Loop de conversa
+print("Buddy está online! Digite 'sair' para encerrar.")
+while True:
+    entrada = input("Você: ")
+    if entrada.lower() == "sair":
+        print("Buddy: Até logo! Volte sempre!")
+        break
+    print("Buddy:", responder(entrada))
