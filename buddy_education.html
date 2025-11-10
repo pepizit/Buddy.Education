@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buddy's Education</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf6e3;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #chatbox {
+            width: 400px;
+            max-width: 90%;
+            height: 400px;
+            border: 2px solid #ccc;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+        #userInput {
+            width: 300px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .buddy {
+            color: blue;
+            font-weight: bold;
+        }
+        .player {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Buddy's Education</h1>
+    <div id="chatbox">
+        <p class="buddy">Buddy: Olá! Eu sou o Buddy. O que você quer aprender hoje?</p>
+    </div>
+    <input type="text" id="userInput" placeholder="Digite algo..." />
+    <button onclick="sendMessage()">Enviar</button>
+
+    <script>
+        const chatbox = document.getElementById("chatbox");
+        const input = document.getElementById("userInput");
+
+        function sendMessage() {
+            const message = input.value.trim();
+            if (message === "") return;
+
+            // Mostra a mensagem do jogador
+            const playerMsg = document.createElement("p");
+            playerMsg.classList.add("player");
+            playerMsg.innerText = "Você: " + message;
+            chatbox.appendChild(playerMsg);
+
+            // Limpa input
+            input.value = "";
+
+            // Resposta do Buddy (simplificada por enquanto)
+            let reply = "";
+            if (message.toLowerCase().includes("brasil")) {
+                reply = "Buddy: O Brasil é um país da América do Sul!";
+            } else if (message.toLowerCase().includes("criar ia")) {
+                reply = "Buddy: Criar uma IA é complexo, mas podemos aprender juntos!";
+            } else {
+                reply = "Buddy: Interessante! Me conte mais...";
+            }
+
+            const buddyMsg = document.createElement("p");
+            buddyMsg.classList.add("buddy");
+            buddyMsg.innerText = reply;
+            chatbox.appendChild(buddyMsg);
+
+            // Scroll automático
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        // Permite enviar mensagem com Enter
+        input.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
+</body>
+</html>
